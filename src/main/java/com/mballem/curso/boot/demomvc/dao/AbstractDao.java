@@ -22,7 +22,7 @@ public class AbstractDao <T, PK extends Serializable> {
         entityManager.persist(entity);
     }
 
-    public void upddate(T entity){
+    public void update(T entity){
         entityManager.merge(entity);
     }
 
@@ -35,7 +35,7 @@ public class AbstractDao <T, PK extends Serializable> {
     }
 
     public List<T> findAll(){
-        return entityManager.createQuery("from" + entityClass.getSimpleName(), entityClass).getResultList();
+        return entityManager.createQuery("from " + entityClass.getSimpleName(), entityClass).getResultList();
 
     }
 

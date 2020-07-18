@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-layout:decorate="~{layout}">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8"/>
 </head>
@@ -35,11 +36,11 @@ layout:decorate="~{layout}">
 	                    </tr>
 	                    </thead>
 	                    <tbody>
-	                    <tr>
-	                        <td>3</td>
-	                        <td>Administração</td>
+	                    <tr th:each=" d : ${departamentos}">
+	                        <td th:text="${d.id}">3</td>
+	                        <td th:text="${d.nome}">Administração</td>
 	                        <td colspan="2">
-	                            <a class="btn btn-info btn-sm" href="/departamentos/editar/3" role="button">
+	                            <a class="btn btn-info btn-sm" th:href="@{/departamentos/editar/{id} (id=${d.id}) }" role="button">
 	                                <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
 	                            </a>
 	                            <button id="btn_departamentos/excluir/3" type="button" class="btn btn-danger btn-sm">
@@ -47,42 +48,8 @@ layout:decorate="~{layout}">
 	                            </button>
 	                        </td>
 	                    </tr>
-	                    <tr>
-	                        <td>2</td>
-	                        <td>Contabilidade</td>
-	                        <td colspan="2">
-	                            <a class="btn btn-info btn-sm" href="/departamentos/editar/2" role="button">
-	                                <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
-	                            </a>
-	                            <button type="button" class="btn btn-danger btn-sm">
-	                                <span class="oi oi-circle-x" title="Exclusão desabilitada" aria-hidden="true"></span>
-	                            </button>
-	                        </td>
-	                    </tr>
-	                    <tr>
-	                        <td>1</td>
-	                        <td>Recursos Humanos</td>
-	                        <td colspan="2">
-	                            <a class="btn btn-info btn-sm" href="/departamentos/editar/1" role="button">
-	                                <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
-	                            </a>
-	                            <button type="button" class="btn btn-danger btn-sm" >
-	                                <span class="oi oi-circle-x" title="Exclusão desabilitada" aria-hidden="true"></span>
-	                            </button>
-	                        </td>
-	                    </tr>
-	                    <tr>
-	                        <td>4</td>
-	                        <td>Tecnologia da Informação</td>
-	                        <td colspan="2">
-	                            <a class="btn btn-info btn-sm" href="/departamentos/editar/4" role="button">
-	                                <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
-	                            </a>
-	                            <button type="button" class="btn btn-danger btn-sm" >
-	                                <span class="oi oi-circle-x" title="Exclusão desabilitada" aria-hidden="true"></span>
-	                            </button>
-	                        </td>
-	                    </tr>
+
+
 	                    </tbody>
 	                </table>
 	            </div>
