@@ -1,5 +1,8 @@
 package com.mballem.curso.boot.demomvc.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -12,12 +15,15 @@ public class Funcionario extends AbstractEntity<Long> {
     @Column(nullable = false, unique = true)
     private String nome;
 
+    @NumberFormat(style = NumberFormat.Style.CURRENCY, pattern = "#,##0.00")
     @Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
     private BigDecimal salario;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Column(name = "data_entrada",  columnDefinition = "DATE")
-    private LocalDate dataEnntrada;
+    private LocalDate dataEntrada;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Column(name = "data_saida", nullable = false, columnDefinition = "DATE")
     private LocalDate dataSaida;
 
@@ -45,12 +51,12 @@ public class Funcionario extends AbstractEntity<Long> {
         this.salario = salario;
     }
 
-    public LocalDate getDataEnntrada() {
-        return dataEnntrada;
+    public LocalDate getDataEntrada() {
+        return dataEntrada;
     }
 
-    public void setDataEnntrada(LocalDate dataEnntrada) {
-        this.dataEnntrada = dataEnntrada;
+    public void setDataEntrada(LocalDate dataEntrada) {
+        this.dataEntrada = dataEntrada;
     }
 
     public LocalDate getDataSaida() {

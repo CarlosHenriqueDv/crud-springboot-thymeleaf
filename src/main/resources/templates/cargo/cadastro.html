@@ -25,25 +25,28 @@ layout:decorate="~{layout}">
 	        </nav>
 	
 	        <div class="container" id="cadastro">
-	            <form action="/cargos/salvar" method="POST">
+
+                <div th:replace="fragments/alert"></div>
+
+	            <form th:action="${cargo.id} == null ? @{/cargos/salvar} : @{/cargos/editar}"
+                      th:object="${cargo}" method="POST">
 	                <div class="form-row">
 	                    <div class="form-group col-md-6">
 	                        <label for="nome">Nome do Cargo</label>
 	                        <input type="text" class="form-control" id="nome" placeholder="Nome Cargo" autofocus="autofocus"
-	                               name="nome" value=""/>
+	                               th:field="*{nome}"/>
 	                    </div>
 	                    <div class="form-group col-md-4">
 	                        <label for="departamento">Departamento</label>
-	                        <select id="departamento" class="form-control" name="departamento">
+	                        <select id="departamento" class="form-control" th:field="*{departamento}">
 	                            <option value="">Selecione</option>
-	                            <option value="3">Administração</option>
-	                            <option value="2">Contabilidade</option>
-	                            <option value="1">Recursos Humanos</option>
-	                            <option value="4">Tecnologia da Informação</option>
+	                            <option th:each="d : ${departamentos}"
+										th:value="${d.id}" th:text="${d.nome}">Administração</option>
+
 	                        </select>
 	                    </div>
 	                </div>
-	                <input type="hidden" id="id" name="id" value=""/>
+	                <input type="hidden" id="id" th:field="*{id}"/>
 	                <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
 	            </form>
 	        </div>

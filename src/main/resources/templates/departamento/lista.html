@@ -25,6 +25,8 @@
 	        </nav>
 	
 	        <div class="container" id="listagem">
+
+				<div th:replace="fragments/alert"></div>
 	
 	            <div class="table-responsive">
 	                <table class="table table-striped table-hover table-sm">
@@ -43,7 +45,8 @@
 	                            <a class="btn btn-info btn-sm" th:href="@{/departamentos/editar/{id} (id=${d.id}) }" role="button">
 	                                <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
 	                            </a>
-	                            <button id="btn_departamentos/excluir/3" type="button" class="btn btn-danger btn-sm">
+	                            <button th:id="${ 'btn_departamentos/excluir/' + d.id}" type="button" class="btn btn-danger btn-sm"
+								data-toggle="modal" data-target="#myModal">
 	                                <span class="oi oi-circle-x" title="Exclusão desabilitada" aria-hidden="true"></span>
 	                            </button>
 	                        </td>
@@ -54,7 +57,8 @@
 	                </table>
 	            </div>
 	        </div>
-	
+			<div th:replace="fragments/modal::modal"></div>
+
 	    </section>
 </body>
 </html>		

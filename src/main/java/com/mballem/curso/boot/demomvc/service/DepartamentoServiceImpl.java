@@ -28,7 +28,7 @@ public class DepartamentoServiceImpl implements DepartamentoService {
     }
 
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public void excluir(Long id) {
         departamentoDao.delete(id);
@@ -44,5 +44,16 @@ public class DepartamentoServiceImpl implements DepartamentoService {
     @Override
     public List<Departamento> buscarTodos() {
         return departamentoDao.findAll();
+    }
+
+    @Override
+    public boolean departamentoTemCargos(Long id) {
+
+        if (buscarPorId(id).getCargos().isEmpty()){
+            return false;
+        }
+
+        return true;
+
     }
 }

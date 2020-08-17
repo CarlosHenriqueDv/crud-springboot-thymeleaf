@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional // readOnly tem valor padrão null serve para não abrir conexão com banco quando só for fazer leitura
+@Transactional // readOnly tem valor padrão false, se colocar como true serve para não abrir conexão com banco quando só for fazer leitura
 public class CargoServiceImpl implements CargoService {
 
     @Autowired
@@ -17,13 +17,13 @@ public class CargoServiceImpl implements CargoService {
 
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public void salvar(Cargo cargo) {
         dao.save(cargo);
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public void editar(Cargo cargo) {
         dao.update(cargo);
     }
@@ -41,5 +41,13 @@ public class CargoServiceImpl implements CargoService {
     @Override
     public List<Cargo> buscarTodos() {
         return dao.findAll();
+    }
+
+    @Override
+    public boolean cargoTemFuncionarios(Long id) {
+        if (buscarPorId(id).getFuncionarios().isEmpty()){
+            return false;
+        }
+        return true;
     }
 }
