@@ -7,7 +7,7 @@
 </head>
 <body>
 
-    <div th:if="${#fields.hasAnyErros()}" th:fragment="validacao">
+    <div th:if="${#fields.hasAnyErrors()}" th:fragment="validacao">
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <div th:each="error : ${#fields.detailedErrors()}">
                 <i class="oi oi-warning"></i>
