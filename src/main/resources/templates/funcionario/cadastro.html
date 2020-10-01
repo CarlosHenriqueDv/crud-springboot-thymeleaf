@@ -34,16 +34,19 @@
                 <div class="form-group col-md-6">
                     <label for="nome">Nome do Funcionário</label>
                     <input type="text" class="form-control" id="nome" placeholder="Nome Completo"
-                           autofocus="autofocus" th:field="*{nome}" />
+                           autofocus="autofocus" th:field="*{nome}"
+                    th:classappend="${#fields.hasErrors('nome')} ? 'isValid'" />
                     <div class="invalid-feedback">
-
+                        <span th:errors="*{salario}"></span>
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="salario">Salário Bruto</label>
                     <input type="text" class="form-control" id="salario" data-mask="#.##0,00"
-                           data-mask-reverse="true" th:field="*{salario}"/>
+                           data-mask-reverse="true" th:field="*{salario}"
+                    th:classappend="${#fields.hasErrors('salario')} ? 'is-invalid'" />
                     <div class="invalid-feedback">
+                        <span th:errors="*{salario}"></span>
 
                     </div>
                 </div>
@@ -51,37 +54,41 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="dataEntrada">Data de Entrada</label>
-                    <input type="date" class="form-control" id="dataEntrada" th:field="*{dataEntrada}"/>
+                    <input type="date" class="form-control" id="dataEntrada" th:field="*{dataEntrada}"
+                    th:classappend="${#fields.hasErrors('dataEntrada')} ? 'is-invalid' " />
                     <div class="invalid-feedback">
-
+                        <span th:errors="*{dataEntrada}"></span>
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="dataSaida">Data de Saída</label>
-                    <input type="date" class="form-control" id="dataSaida" th:field="*{dataSaida}"/>
+                    <input type="date" class="form-control" id="dataSaida" th:field="*{dataSaida}"
+                    th:classappend="${#fields.hasErrors('dataSaida')} ? 'is-invalid'" />
                     <div class="invalid-feedback">
-
+                        <span th:errors="*{dataSaida}"></span>
                     </div>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="cargo">Cargo</label>
-                    <select id="cargo" class="form-control" th:field="*{cargo}">
+                    <select id="cargo" class="form-control" th:field="*{cargo}"
+                            th:classappend="${#fields.hasErrors('cargo')} ? 'is-invalid'">
                         <option value="">Selecione...</option>
                         <option th:each="c : ${cargos}" th:value="${c.id}" th:text="${c.nome}"></option>
                     </select>
                     <div class="invalid-feedback">
-
+                        <span th:errors="*{cargo}"></span>
                     </div>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="cidade">Cidade</label>
-                    <input type="text" class="form-control" id="cidade" th:field="*{endereco.cidade}"/>
+                    <input type="text" class="form-control" id="cidade" th:field="*{endereco.cidade}"
+                    th:classappend="${#fields.hasErrors('cidade')} ? 'is-invalid'" />
                     <div class="invalid-feedback">
-
+                        <span th:errors="*{endereco.cidade}"></span>
                     </div>
                 </div>
                 <div class="form-group col-md-6">

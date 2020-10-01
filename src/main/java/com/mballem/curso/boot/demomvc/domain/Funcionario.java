@@ -4,6 +4,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -19,6 +22,8 @@ public class Funcionario extends AbstractEntity<Long> {
     @Column(nullable = false, columnDefinition = "DECIMAL(7,2) DEFAULT 0.00")
     private BigDecimal salario;
 
+    @NotNull
+    @PastOrPresent(message = "{PastOrPresent.funcionario.dataEntrada}")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Column(name = "data_entrada", nullable = false, columnDefinition = "DATE")
     private LocalDate dataEntrada;
@@ -27,10 +32,12 @@ public class Funcionario extends AbstractEntity<Long> {
     @Column(name = "data_saida", columnDefinition = "DATE")
     private LocalDate dataSaida;
 
+    @Valid
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id_fk")
     private Endereco endereco;
 
+    @NotNull(message = "{NotNull.funcionario.cargo}")
     @ManyToOne
     @JoinColumn(name = "cargo_id_fk")
     private Cargo cargo;
