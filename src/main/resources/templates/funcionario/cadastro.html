@@ -37,9 +37,9 @@
                     <label for="nome">Nome do Funcionário</label>
                     <input type="text" class="form-control" id="nome" placeholder="Nome Completo"
                            autofocus="autofocus" th:field="*{nome}"
-                           th:classappend="${#fields.hasErrors('nome')} ? 'isValid'"/>
+                           th:classappend="${#fields.hasErrors('nome')} ? 'is-invalid'"/>
                     <div class="invalid-feedback">
-                        <span th:errors="*{salario}"></span>
+                        <span th:errors="*{nome}"></span>
                     </div>
                 </div>
                 <div class="form-group col-md-6">
@@ -88,7 +88,7 @@
                 <div class="form-group col-md-6">
                     <label for="cidade">Cidade</label>
                     <input type="text" class="form-control" id="cidade" th:field="*{endereco.cidade}"
-                           th:classappend="${#fields.hasErrors('cidade')} ? 'is-invalid'"/>
+                           th:classappend="${#fields.hasErrors('endereco.cidade')} ? 'is-invalid'"/>
                     <div class="invalid-feedback">
                         <span th:errors="*{endereco.cidade}"></span>
                     </div>

@@ -46,7 +46,7 @@ public class FuncionarioController {
     public String salvar(@Valid Funcionario funcionario, BindingResult result, RedirectAttributes attr) {
 
         if (result.hasErrors()){
-            return "/funcionario/cadastr";
+            return "/funcionario/cadastro";
         }
 
         funcionarioService.salvar(funcionario);
