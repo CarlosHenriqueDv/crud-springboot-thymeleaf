@@ -29,16 +29,25 @@ public class FuncionarioController {
     @Autowired
     private CargoService cargoService;
 
+    private enum RESOURCES{
+        CADASTRO_FUNCIONARIO("/funcionario/cadastro"), LISTAR_FUNCIONARIO("/funcionario/lista");
+
+        RESOURCES(String path){
+            this.path = path;
+        }
+        private String path;
+    }
+
 
     @GetMapping("/cadastrar")
     public String cadastrar(Funcionario funcionario){
-        return "/funcionario/cadastro";
+        return RESOURCES.CADASTRO_FUNCIONARIO.path;
     }
 
     @GetMapping("/listar")
     public String listar(Model model){
         model.addAttribute("funcionarios", funcionarioService.buscarTodos());
-        return "/funcionario/lista";
+        return RESOURCES.LISTAR_FUNCIONARIO.path;
 
     }
 
