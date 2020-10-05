@@ -1,4 +1,4 @@
-package com.mballem.curso.boot.demomvc.web.controller.conversor;
+package com.mballem.curso.boot.demomvc.web.conversor;
 
 import com.mballem.curso.boot.demomvc.domain.Cargo;
 import com.mballem.curso.boot.demomvc.service.CargoService;

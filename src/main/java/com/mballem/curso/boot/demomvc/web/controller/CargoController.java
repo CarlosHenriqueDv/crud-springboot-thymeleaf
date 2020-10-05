@@ -24,22 +24,33 @@ public class CargoController {
     @Autowired
     private DepartamentoService departamentoService;
 
+    private enum RESOURCES{
+        CADASTRO_CARGO("cargo/cadastro"), LISTA_CARGO("cargo/lista");
+
+        RESOURCES(String path) {
+            this.path = path;
+        }
+
+        private String path;
+
+    }
+
     @GetMapping("/cadastrar")
     public String cadastrar(Cargo cargo) {
-        return "/cargo/cadastro";
+        return RESOURCES.CADASTRO_CARGO.path;
     }
 
     @GetMapping("/listar")
     public String listar(ModelMap model) {
         model.addAttribute("cargos", cargoService.buscarTodos());
-        return "/cargo/lista";
+        return RESOURCES.LISTA_CARGO.path;
     }
 
     @PostMapping("/salvar")
     public String salvar(@Valid Cargo cargo, BindingResult result, RedirectAttributes attr) {
 
         if (result.hasErrors()){
-            return "/cargo/cadastro";
+            return RESOURCES.CADASTRO_CARGO.path;
         }
 
         cargoService.salvar(cargo);
@@ -67,14 +78,14 @@ public class CargoController {
     public String preEditar(@PathVariable("id") Long id, ModelMap model) {
 
         model.addAttribute("cargo", cargoService.buscarPorId(id));
-        return "cargo/cadastro";
+        return RESOURCES.CADASTRO_CARGO.path;
     }
 
     @PostMapping("/editar")
     public String editar(@Valid Cargo cargo, BindingResult result , RedirectAttributes attr){
 
         if (result.hasErrors()){
-            return "/cargo/cadastro";
+            return RESOURCES.CADASTRO_CARGO.path;
         }
 
         cargoService.editar(cargo);

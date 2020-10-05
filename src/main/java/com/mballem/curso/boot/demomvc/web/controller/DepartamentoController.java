@@ -22,22 +22,32 @@ public class DepartamentoController {
     @Autowired
     private DepartamentoService departamentoService;
 
+    private enum RESOURCE{
+        CADASTRO_DEPARTAMENTO("departamento/cadastro"), LISTAR_DEPARTAMENTO("departamento/lista");
+
+        RESOURCE(String path) {
+            this.path = path;
+        }
+
+        private String path;
+    }
+
     @GetMapping("/cadastrar")
     public String cadastrar(Departamento departamento){
-        return "/departamento/cadastro";
+        return RESOURCE.CADASTRO_DEPARTAMENTO.path;
     }
 
     @GetMapping("/listar")
     public String listar(ModelMap model){
         model.addAttribute("departamentos", departamentoService.buscarTodos());
-        return "/departamento/lista";
+        return RESOURCE.LISTAR_DEPARTAMENTO.path;
     }
 
     @PostMapping("/salvar")
     public String salvar(@Valid Departamento departamento, BindingResult result, RedirectAttributes attr){
 
         if (result.hasErrors()){
-            return "/departamento/cadastro";
+            return RESOURCE.CADASTRO_DEPARTAMENTO.path;
         }
 
         departamentoService.salvar(departamento);
@@ -48,7 +58,7 @@ public class DepartamentoController {
     @GetMapping("/editar/{id}")
     public String preEditar(@PathVariable("id") Long id, ModelMap model){
         model.addAttribute("departamento", departamentoService.buscarPorId(id));
-        return "/departamento/cadastro";
+        return RESOURCE.CADASTRO_DEPARTAMENTO.path;
 
     }
 
@@ -56,7 +66,7 @@ public class DepartamentoController {
     public String editar(@Valid Departamento departamento, BindingResult result, RedirectAttributes attr){
 
         if (result.hasErrors()){
-            return "/departamento/cadastro";
+            return RESOURCE.CADASTRO_DEPARTAMENTO.path;
         }
 
         departamentoService.editar(departamento);

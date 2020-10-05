@@ -12,11 +12,11 @@
     <link rel="icon" href="/image/favicon.png"/>
 
     <!-- Bootstrap core CSS -->
-    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="/webjars/open-iconic/font/css/open-iconic-bootstrap.min.css" rel="stylesheet"/>
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/webjars/open-iconic/font/css/open-iconic-bootstrap.min.css}" rel="stylesheet"/>
 
     <!-- Custom styles for this template -->
-    <link href="/css/style.css" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
     <header th:replace="fragments/header :: cabecalho">
@@ -47,16 +47,16 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/webjars/jquery/jquery.min.js"></script>
-    <script src="/webjars/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/jquery-mask-plugin/dist/jquery.mask.min.js}"></script>
     <script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     <script type="text/javascript">
 
         var url = '';
 
         $('button[id*="btn_"]').click(function () {
-            url = "http://localhost:8080/" + $(this).attr('id').split("_")[1];
+            url = "/" + $(this).attr('id').split("_")[1];
         });
 
         $( '#ok_confirm').click(function () {

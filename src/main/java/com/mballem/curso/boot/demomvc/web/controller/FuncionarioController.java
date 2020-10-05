@@ -5,12 +5,14 @@ import com.mballem.curso.boot.demomvc.domain.Funcionario;
 import com.mballem.curso.boot.demomvc.domain.UF;
 import com.mballem.curso.boot.demomvc.service.CargoService;
 import com.mballem.curso.boot.demomvc.service.FuncionarioService;
+import com.mballem.curso.boot.demomvc.web.validator.FuncionarioValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -30,12 +32,19 @@ public class FuncionarioController {
     private CargoService cargoService;
 
     private enum RESOURCES{
-        CADASTRO_FUNCIONARIO("/funcionario/cadastro"), LISTAR_FUNCIONARIO("/funcionario/lista");
+        CADASTRO_FUNCIONARIO("funcionario/cadastro"), LISTAR_FUNCIONARIO("funcionario/lista");
 
         RESOURCES(String path){
             this.path = path;
         }
         private String path;
+    }
+
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder){
+        binder.addValidators(new FuncionarioValidator());
+
     }
 
 
@@ -55,7 +64,7 @@ public class FuncionarioController {
     public String salvar(@Valid Funcionario funcionario, BindingResult result, RedirectAttributes attr) {
 
         if (result.hasErrors()){
-            return "/funcionario/cadastro";
+            return RESOURCES.CADASTRO_FUNCIONARIO.path;
         }
 
         funcionarioService.salvar(funcionario);
@@ -67,7 +76,7 @@ public class FuncionarioController {
     public String preEditar(@PathVariable("id") Long id, ModelMap modelMap){
 
         modelMap.addAttribute("funcionario", funcionarioService.buscarPorId(id));
-        return "funcionario/cadastro";
+        return RESOURCES.CADASTRO_FUNCIONARIO.path;
 
     }
 
@@ -75,7 +84,7 @@ public class FuncionarioController {
     public String editar(@Valid Funcionario funcionario, BindingResult result, RedirectAttributes attr){
 
         if (result.hasErrors()){
-            return "/funcionario/cadastro";
+            return RESOURCES.CADASTRO_FUNCIONARIO.path;
         }
 
         funcionarioService.editar(funcionario);
@@ -96,14 +105,14 @@ public class FuncionarioController {
     @GetMapping("/buscar/nome")
     public String getPorNome(@RequestParam("nome") String nome, ModelMap modelMap){
         modelMap.addAttribute("funcionarios", funcionarioService.buscaPorNome(nome));
-        return "/funcionario/lista";
+        return RESOURCES.LISTAR_FUNCIONARIO.path;
 
     }
 
     @GetMapping("/buscar/cargo")
     public String getPorCargo(@RequestParam("id") Long id, ModelMap modelMap){
         modelMap.addAttribute("funcionarios", funcionarioService.buscaPorCargo(id));
-        return "/funcionario/lista";
+        return RESOURCES.LISTAR_FUNCIONARIO.path;
     }
 
     @GetMapping("/buscar/data")
@@ -112,7 +121,7 @@ public class FuncionarioController {
                              ModelMap modelMap){
         modelMap.addAttribute("funcionarios", funcionarioService.buscarPorDatas(entrada, saida));
 
-        return "/funcionario/lista";
+        return RESOURCES.LISTAR_FUNCIONARIO.path;
     }
 
 
