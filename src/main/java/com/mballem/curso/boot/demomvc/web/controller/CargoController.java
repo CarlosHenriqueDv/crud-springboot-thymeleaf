@@ -4,6 +4,8 @@ import com.mballem.curso.boot.demomvc.domain.Cargo;
 import com.mballem.curso.boot.demomvc.domain.Departamento;
 import com.mballem.curso.boot.demomvc.service.CargoService;
 import com.mballem.curso.boot.demomvc.service.DepartamentoService;
+import com.mballem.curso.boot.demomvc.util.PaginacaoUtil;
+import org.hibernate.service.spi.OptionallyManageable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/cargos")
@@ -41,8 +44,16 @@ public class CargoController {
     }
 
     @GetMapping("/listar")
-    public String listar(ModelMap model) {
-        model.addAttribute("cargos", cargoService.buscarTodos());
+    public String listar(ModelMap model,
+                         @RequestParam("page")Optional<Integer> page,
+                         @RequestParam("dir")Optional<String> dir) {
+
+        int paginaAtual = page.orElse(1);
+        String ordem = dir.orElse("asc");
+
+        PaginacaoUtil<Cargo> pageCargo = cargoService.buscaPorPaginada(paginaAtual, ordem);
+
+        model.addAttribute("pageCargo", pageCargo);
         return RESOURCES.LISTA_CARGO.path;
     }
 

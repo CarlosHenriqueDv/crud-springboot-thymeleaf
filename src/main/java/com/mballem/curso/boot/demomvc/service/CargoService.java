@@ -1,6 +1,7 @@
 package com.mballem.curso.boot.demomvc.service;
 
 import com.mballem.curso.boot.demomvc.domain.Cargo;
+import com.mballem.curso.boot.demomvc.util.PaginacaoUtil;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ public interface CargoService {
     List<Cargo> buscarTodos();
 
     boolean cargoTemFuncionarios(Long id);
+
+    PaginacaoUtil<Cargo> buscaPorPaginada(int pagina, String direcao);
 }

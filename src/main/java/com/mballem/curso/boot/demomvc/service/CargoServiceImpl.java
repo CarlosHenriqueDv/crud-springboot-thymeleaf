@@ -2,6 +2,7 @@ package com.mballem.curso.boot.demomvc.service;
 
 import com.mballem.curso.boot.demomvc.dao.CargoDao;
 import com.mballem.curso.boot.demomvc.domain.Cargo;
+import com.mballem.curso.boot.demomvc.util.PaginacaoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,5 +50,10 @@ public class CargoServiceImpl implements CargoService {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public PaginacaoUtil<Cargo> buscaPorPaginada(int pagina, String direcao) {
+        return dao.buscaPaginada(pagina, direcao);
     }
 }
