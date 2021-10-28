@@ -47,7 +47,7 @@ Foi utilizado o padrão de projetos *MVC* - **Model View Controller**.
 >A camada de interação do usuário(view), a camada de manipulação dos dados(model) e a camada de controle(controller).
 
 ### Versionamento Com Git
-Plataforma em nuvem para armazenar o código-fonte foi o [Github](github.com).
+Plataforma em nuvem para armazenar o código-fonte foi o [Github](https://github.com/).
 
 ### Java com SpringBoot 
 A anotação *@Controller* transforma a classe em um *bean* do Spring e faz com ela seja reconhecida pelo framework como camada de controller, existem várias outras anotações importantes que foram utilizadas dessa implementação, como @RequestMapping que define o *path* de acesso desse controller, @GetMapping, @PutMapping e todos os outros métodos *Http's*.
