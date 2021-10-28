@@ -6,11 +6,11 @@
     - [Front-End](#front-end)
     - [Ferramentas](#ferramentas)
 + [Código Fonte](#código-fonte)  
-   - [Padrão MVC](#padrão MVC)
+   - [Padrão MVC](#padrão-MVC)
    - [Versionamento com Git](#versionamento-com-git)
    - [Java com Springboot](#java-com-springboot)
    - [Java Persistence API com Hibernate](#java-persistence-api-com-hibernate)    
-+ [Rodando a Aplicação](#Rodando a Aplicação)
++ [Rodando a Aplicação](#Rodando-a-Aplicação)
     
 ## Tecnologias Utilizadas
     
