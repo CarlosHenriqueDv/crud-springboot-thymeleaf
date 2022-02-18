@@ -52,7 +52,7 @@ Plataforma em nuvem para armazenar o código-fonte foi o [Github](https://github
 ### Java com SpringBoot 
 A anotação *@Controller* transforma a classe em um *bean* do Spring e faz com ela seja reconhecida pelo framework como camada de controller, existem várias outras anotações importantes que foram utilizadas dessa implementação, como @RequestMapping que define o *path* de acesso desse controller, @GetMapping, @PutMapping e todos os outros métodos *Http's*.
 
-Outra anotação muito utilizada em nossa aplicação é a *@Autowired* que define uma injeção de depedência.
+Outra anotação muito utilizada nesta aplicação é a *@Autowired* que define uma injeção de depedência.
 
 ~~~java
 @Controller
